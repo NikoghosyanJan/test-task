@@ -1,92 +1,105 @@
 
-// function for filter on small screens    !!!!!!!!
-function foo(){
+
+// function for filters on small screens    !!!!!!!!
+function showFilters(){
     let filter = document.querySelector(".filters-div");
-    let deleteFilter = document.querySelector(".delete-filter");
     let filtersX = document.querySelector(".filters-x");
+    let filtersList = document.querySelector(".filters");
+    let foreground = document.querySelector(".foreground");
+    let body = document.querySelector("body");
+    let apply = document.querySelector(".apply");
 
     function filtersToggle(){
-        let filtersList = document.querySelector(".filters");
-        let foreground = document.querySelector(".foreground");
-        let body = document.querySelector("body");
-        let apply = document.querySelector(".apply");
         body.style.height = window.screen.height;
         filtersList.classList.toggle("filtersBlock");
         foreground.classList.toggle("foregroundBlock");
         body.classList.toggle("bodyFroze");
         filtersX.classList.toggle("blockdisplay");
         apply.classList.toggle("blockdisplay");
-        foreground.addEventListener("click", filtersToggle);
-        apply.addEventListener("click", filtersToggle);
-    }
-
+    };
+    function filtersOff ( ){
+        filtersList.style.animationName = "filters-animation-reverse";
+        setTimeout(()=>{
+            filtersToggle();
+            filtersList.style.animationName = "filters-animation";
+        }, 300);
+    };
+    function filtersApply ( ){
+        filtersList.style.animationName = "filters-animation-apply";
+        setTimeout(()=>{
+            filtersToggle();
+            filtersList.style.animationName = "filters-animation";
+        }, 300);
+    };
+    foreground.addEventListener("click", filtersOff);
+    apply.addEventListener("click", filtersApply);
     filter.addEventListener("click", filtersToggle);
-    filtersX.addEventListener("click", filtersToggle);
+    filtersX.addEventListener("click", filtersOff);
      
-}
-foo()
+};
+showFilters();
 
 //  FUNCTION FOR FAVORITE LIST       !!!!!!!!!!!
-function favoriteList () {
 
-    let arr = document.querySelectorAll(".heard")
-    heardsArr = [...arr]
+function favoriteList () {
+    let arr = document.querySelectorAll(".heard");
+    heardsArr = [...arr];
 
     function srcCreator() {
         if(!JSON.parse(localStorage.getItem("data"))){
-            let srcObj = {}
+            let srcObj = {};
             for(let i = 0; i<heardsArr.length; i++){
                 let src = "./haypost-imgs/Vector 42.png";
-                srcObj[i] = src
+                srcObj[i] = src;
             }
-            localStorage.setItem("data", JSON.stringify(srcObj))
+            localStorage.setItem("data", JSON.stringify(srcObj));
         }else{
-            srcObj = JSON.parse(localStorage.getItem("data"))
+            srcObj = JSON.parse(localStorage.getItem("data"));
         }
-        return srcObj
+        return srcObj;
     }
-    srcCreator()
+    srcCreator();
 
     function imgRender(){
         heardsArr.forEach((el, index)=>{
-            let img = document.createElement("img")
-            let data = JSON.parse(localStorage.getItem("data"))
-            img.src = data[index]
-            el.appendChild(img)
+            let img = document.createElement("img");
+            let data = JSON.parse(localStorage.getItem("data"));
+            img.src = data[index];
+            el.appendChild(img);
 
-        })  
-    }
-    imgRender()
+        })  ;
+    };
+    imgRender();
 
     function imgChange (){
         heardsArr.forEach((el, i)=>{
             el.addEventListener("click", ()=>{
-                let data = JSON.parse(localStorage.getItem("data"))
+                let data = JSON.parse(localStorage.getItem("data"));
                 if(data[i] === "./haypost-imgs/Vector 42.png"){
                     data[i] = "./haypost-imgs/blueheard.png"
                 }else{
                     data[i] = "./haypost-imgs/Vector 42.png"
                 }
-                localStorage.setItem("data", JSON.stringify(data))
+                localStorage.setItem("data", JSON.stringify(data));
                 heardsArr.forEach((e, ind)=>{
                     e.innerHTML = ""
                 })
                 imgRender()
+                el.firstChild.classList.toggle("big-heard-basket");
             })
         })
     }
     imgChange()  
 }
-favoriteList()
+favoriteList();
 
 
-//  FUNTION FOR BASKET   !!!!!!!!!
+//  FUNCTION FOR BASKET   !!!!!!!!!
 
 function addProductInBasket() {
     let src1 = "./haypost-imgs/Frame 277.png";
     let src2 = "./haypost-imgs/basket.png";
     let basketDivs = [...document.querySelectorAll(".basket")];
-
 
     function srcCreate (){
         if(!localStorage.getItem("basketData")){
@@ -139,10 +152,31 @@ function addProductInBasket() {
                 localStorage.setItem("basketNumber", JSON.stringify(filteredData.length))
                 });
                 drawBaskets()
+                el.firstChild.classList.toggle("big-heard-basket")
             })
         })
     }
     changeBasket()
 }
 addProductInBasket()
+
+
+// FUNCTION FOR RANGE PRICE IN FILTERSLIST!!!!!!!
+
+function rangePrice () {
+    let range = document.querySelector(".range-input");
+    let price = document.querySelector(".range-price");
+    // range.addEventListener("mousemove", ()=>{
+    //     price.innerHTML = `${range.value * 500} ֏`
+    // });
+    range.addEventListener("mousedown", ()=>{
+        price.innerHTML = `${range.value * 500} ֏`;
+        range.addEventListener("mousemove", ()=>{
+            price.innerHTML = `${range.value * 500} ֏`
+        });
+    });
+}
+rangePrice()
+
+
 

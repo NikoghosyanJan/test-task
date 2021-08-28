@@ -12,7 +12,19 @@
 
 body{
     position: relative;
+    animation-timing-function: cubic-bezier(.85,1.84,.62,-0.09);
+    animation-name: body-animation;
+    animation-delay: 1.5s;
+    animation-duration: 0.2s;
+    position: relative;
+
 }
+@keyframes body-animation {
+    0%   { left:0px; top:0px; }
+    50% {left: 10px ; top: 0px;}
+    100%  { left:0; top:0px;}
+}
+
 /* !!!! COLORS   !!! */
 .color-blue{color:#004494;}
 .color-gray{color: #5F6D7C;}
@@ -58,7 +70,52 @@ header{
 .language{
     display: flex;
     align-items: center;
+    position: relative;
 }
+.language:hover .more-language{
+    display: block;
+}
+.language:hover{cursor: pointer;}
+.more-language{
+    position: absolute;
+    width: 150px;
+    padding-top: 20px ;
+    background-color: #cacaca;
+    top: 100%;
+    left: -50px;
+    z-index: 50;
+    display: none;
+    
+}
+.am, .ru, .usa{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    padding:5px 0 10px 0 ;
+    color: #000;
+    border-top: 1px solid #5c5c5c;
+}
+.am:hover, .ru:hover, .usa:hover{
+    background-color: rgb(75, 75, 75);
+    color: #FFFFFF;
+    cursor: pointer;
+}
+.more-language > div > div > img{
+    width: 100%;
+}
+.more-language > div > div > ip{
+    font-size: 20px;
+    font-weight: 700;
+}
+.more-language > div > div {
+    width: 40px;
+    padding: 5px;
+    border-radius: 50%;
+}
+
+
+
+
 .language > img{
     margin-left: 7.25px;
 }
@@ -73,7 +130,20 @@ header{
     width: 144px;
     height: 34px;
     margin-right: 44px;
+    animation-name: logo-animation;
+    animation-duration: 1.5s;
+    position: relative;
+    animation-timing-function: cubic-bezier(1,.01,.7,.71);
 }
+
+@keyframes logo-animation {
+    0%   { left:-500px; top:0px; -webkit-transform: rotate(0deg);}
+    100%  { left:0; top:0px; -webkit-transform: rotate(360deg);}
+}
+
+
+
+
 .logo > img{
     width: 100%;
 }
@@ -132,6 +202,15 @@ nav{
 }
 .basket-top{
     position: relative;
+}
+.basket-top:hover .basket-count{
+    transform: rotate(360deg);
+    transition: 0.5s;
+    color: black;
+    background-color: rgb(245, 176, 49);
+}
+.basket-top:hover {
+    cursor: pointer;
 }
 .basket-count{
     position: absolute;
@@ -209,7 +288,9 @@ nav{
     background-color: #F18E00;
     width: 329px;
     text-align: center;
+    border-radius: 3px;
 }
+.g-shock-text > div:last-of-type:hover{cursor: pointer; background-color: #dd8203; color: rgb(92, 87, 87);}
 .spiral-1{
     width:7.1875% ;
     position: absolute;
@@ -259,7 +340,10 @@ nav{
 .filters{
     width: 19.1%;
     padding-right: 10px;
+
 }
+
+
 .filter-pricemax{
     display: flex;
     padding: 22px 0 5px 0;
@@ -317,15 +401,14 @@ nav{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px 0 25px 0;
+    padding: 7px 0 25px 0;
     flex-wrap: wrap;
 }
-.filters-delete > p:last-of-type{
-    padding-top: 10px;
-}
+
 .filters-delete > p:first-of-type{
     font-weight: 600;
 }
+
 .sow-sort{
     display: flex;
     justify-content: space-between;
@@ -352,7 +435,13 @@ nav{
     box-shadow: 0px 8px 22px rgba(50, 94, 137, 0.4);
     position: relative;
     border-radius: 15px;
+    transition: 0.2s;
 }
+.product:hover{
+    box-shadow: 0px 15px 40px rgba(1, 11, 20, 1);
+    cursor: pointer;
+}
+
 .product-heard-basket{
     position: absolute;
     top: 9px;
@@ -363,6 +452,9 @@ nav{
     border-radius: 50%;
     background-color: #FFFFFF;
     margin-bottom: 4px;
+    position: absolute;
+    top: 54px;
+    right: 9px;
 }
 .basket:hover{
     cursor: pointer;
@@ -372,6 +464,9 @@ nav{
     border-radius: 50%;
     background-color: #FFFFFF;
     margin-bottom: 4px;
+    position: absolute;
+    top: 9px;
+    right: 9px;
 }
 .heard:hover{
     cursor: pointer;
@@ -565,11 +660,18 @@ footer{
     display: flex;
     justify-content: space-between;
 }
+.fb  > img:hover{
+    background-color: #0063BD;
+    opacity: 0.5;
+}
 .footer-imgs{
     display: flex;
 }
 .footer-imgs > div{
     padding: 0 17px;
+}
+.footer-imgs > div > svg:hover{
+    fill: royalblue;
 }
 .footer > div > p{
     padding: 10px 0 ;
@@ -583,6 +685,14 @@ footer{
     text-align: center;
     padding-top: 44px;
 }
+
+
+
+
+
+
+
+
 
 
 
@@ -613,6 +723,7 @@ footer{
     .g-shock-text>div:first-of-type{font-size: 40px;}
     .g-shock-text>div:nth-of-type(2){font-size: 18px;}
     .g-shock-text>div:last-of-type{width: 250px; padding: 14px 60px;}
+    .filters-delete > p:last-of-type{padding-top: 10px;}
     .filters{display: none; width: 375px;}
     .filter-pricemax{display: flex;}
     .products-show{width: 100%;}
@@ -698,7 +809,7 @@ footer{
     .top-panel{font-size: 11px;}
     .products{padding-left: 0;}
     .sow-sort{padding: 20px 0 0 0; font-size: 12px;}
-    .product-heard-basket > div{width: 28px; height: 28px; padding: 7px 5px;}
+    .product-heard-basket > div{min-width: 28px; min-height: 28px; padding: 7px 5px;}
     .product-heard-basket > div> img{width: 17px;}
     .product-name-price>p:first-of-type{font-size: 12px;}
     .product-name-price>p:nth-of-type(2){font-size: 16px;}
@@ -758,6 +869,7 @@ footer{
 
 @media screen and (max-width: 380px) {
     .logo{display: none;}
+    body{animation-name: none;}
     .enter{display: none;}
     .g-shock{height: 145px;}
     .watch{width: 19%;}
@@ -775,7 +887,6 @@ footer{
 
 
 
-
 }
 
 @media screen and (max-width: 320px) {
@@ -785,8 +896,10 @@ footer{
     .filters-x{margin-left: 50%;}
     .product{width: 100px;}
     .product > div > img{width: 100%;}
-    .product-heard-basket > div {width: 15px; height: 15px;  padding: 0px ; position: relative;}
-    .product-heard-basket > div > img{width: 8px; position: absolute; top: 5px; left: 3px;}
+    .product-heard-basket > div {min-width: 15px; min-height: 15px;  padding: 0px 5px ; }
+    .product-heard-basket > div > img{width: 8px;  top: 5px; left: 3px; animation-name: none;}
+    .product-heard-basket > div:first-of-type{top: 0px; right: 0px;}
+    .product-heard-basket > div:last-of-type{top: 20px; right: 0px;}
     .product-name-price>p:first-of-type{font-size: 8px;}
     .product-name-price>p:nth-of-type(2){font-size: 10px;}
     .product-name-price>p:last-of-type>span{font-size: 12px; display: flex; flex-wrap: wrap; padding-left: 15px;}
@@ -815,6 +928,7 @@ footer{
 
 .bodyFroze{
     overflow: hidden;
+    width: calc(100% - 17px);
 }
 
 .filtersBlock{
@@ -826,17 +940,45 @@ footer{
     /* width: 375px; */
     /* width: 49%; */
     z-index: 10;
-    padding: 16px;
+    padding: 16px 16px 36px 16px ;
     overflow: scroll;
-    height: 1024px;
+    height: 100vh;
+    animation-name: filters-animation; 
+    animation-duration: 0.5s;
+
+
 }
-.filter-scroll{
-    height: 1600px;
+@keyframes filters-animation {
+    0%   { left:-500px; top:0px;}
+    100%  { left:0; top:0px;}
 }
+
+@keyframes filters-animation-reverse {
+    0%   {  left:0; top:0px;}
+    100%  {left:-500px; top:0px;}
+}
+@keyframes filters-animation-apply {
+    0%   {  left:0; top:0px;}
+    100%  {left: 3000px; top:0px;}
+}
+
+.big-heard-basket{
+    animation-name: big-heard ;
+    animation-duration: 0.3s;
+
+}
+@keyframes big-heard {
+    0%   { width: 20px;}
+    25% {width: 25px;}
+    50% {width: 40px; }
+    70% {width:25px ;}
+    100%  {width:20px ;}
+}
+
+
+
+
 
 .blockdisplay{
     display: block;
-}
-.favorite{
-    background-color: red;
 }
